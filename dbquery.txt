@@ -1,0 +1,43 @@
+CREATE TABLE `Cars` (
+  `car_id` INT NOT NULL AUTO_INCREMENT,
+  `brand` TINYTEXT,
+  `model` TINYTEXT,
+  `color` TINYTEXT,
+  `hire_price` INT,
+  PRIMARY KEY (`car_id`)
+);
+
+CREATE TABLE `Customers` (
+  `customer_id` INT NOT NULL AUTO_INCREMENT,
+  `first_name` TINYTEXT,
+  `last_name` TINYTEXT,
+  `email` TINYTEXT,
+  `identification` TINYTEXT,
+  `age` INT,
+  `phone_number` INT,
+  PRIMARY KEY (`customer_id`)
+);
+
+CREATE TABLE `Staff` (
+  `staff_id` INT NOT NULL AUTO_INCREMENT,
+  `username` TINYTEXT,
+  `password` LONGTEXT,
+  `email` TINYTEXT,
+  `age` INT,
+  PRIMARY KEY (`staff_id`)
+);
+
+CREATE TABLE `Bookings` (
+  `booking_id` INT(6) ZEROFILL NOT NULL AUTO_INCREMENT,
+  `car_id` INT,
+  `staff_id` INT,
+  `customer_id` INT,
+  `hire_date` DATE,
+  `booking_date` DATE,
+  `cancelled` BIT DEFAULT 0,
+  PRIMARY KEY (`booking_id`),
+  FOREIGN KEY (`car_id`) REFERENCES `Cars`(`car_id`),
+  FOREIGN KEY (`customer_id`) REFERENCES `Customers`(`customer_id`),
+  FOREIGN KEY (`staff_id`) REFERENCES `Staff`(`staff_id`)
+);
+

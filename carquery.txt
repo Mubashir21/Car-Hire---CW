@@ -1,0 +1,12 @@
+INSERT INTO `cars`(`type`, `brand`, `model`, `color`, `hire_price`) VALUES ('Luxury','Rolls Royce','Phantom','Blue', 9800), ('Luxury','Bentley','Continental Flying Spur','White', 4800), ('Luxury','Mercedes Benz','CLS 350','Silver', 1350), ('Luxury','Jaguar','S Type','Champagne', 1350), ('Sports','Ferrari','430 Scuderia','Red', 6000), ('Sports','Lamborghini','Murcielago LP640','Matte Black', 7000), ('Sports','Porsche','Boxster','White', 2800), ('Sports','Lexus','SC430','Black', 1600), ('Classic','Jaguar','MK 2','White', 2200), ('Classic','Rolls Royce','Silver Spirit Limousine','Georgian Silver', 3200), ('Classic','MG','TD','Red', 2500);
+
+"SELECT * FROM bookings INNER JOIN cars ON bookings.car_id=cars.car_id WHERE bookings.hire_date=? AND cars.model=?;";
+
+
+AND (('2023-04-21' BETWEEN (bookings.start_date WHERE cars.model='Rolls Royce Phantom') AND (bookings.end_date WHERE cars.model='Rolls Royce Phantom') OR ('2023-04-25' BETWEEN (bookings.start_date WHERE cars.model='Rolls Royce Phantom') AND (bookings.end_date WHERE cars.model='Rolls Royce Phantom'));
+
+SELECT * FROM bookings INNER JOIN cars ON bookings.car_id=cars.car_id WHERE ('2023-04-21' BETWEEN 
+            (SELECT bookings.start_date FROM bookings INNER JOIN cars ON bookings.car_id=cars.car_id WHERE cars.model = 'Rolls Royce Phantom') AND 
+            (SELECT bookings.end_date FROM bookings INNER JOIN cars ON bookings.car_id=cars.car_id WHERE cars.model = 'Rolls Royce Phantom')) OR
+            ('2023-04-25' BETWEEN (SELECT bookings.start_date FROM bookings INNER JOIN cars ON bookings.car_id=cars.car_id WHERE cars.model = 'Rolls Royce Phantom') AND 
+            (SELECT bookings.end_date FROM bookings INNER JOIN cars ON bookings.car_id=cars.car_id WHERE cars.model = 'Rolls Royce Phantom'))
