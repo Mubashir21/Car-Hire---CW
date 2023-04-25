@@ -1,9 +1,11 @@
 <?php 
 
+// used to connect to the database
+
 $servername = "localhost";
 $dBUsername = "root";
-$dBPassword = "password";
-$dBName = "carhiredb";
+$dBPassword = "";
+$dBName = "COMP1044_database";
 
 $conn = mysqli_connect($servername, $dBUsername, $dBPassword, $dBName);
 

@@ -4,11 +4,13 @@ if (isset($_POST['register-button'])) {
     
     require 'dbh.inc.php';
 
-    $username = $_POST['username'];
-    $email = $_POST['email'];
+    // gets information from user
+    $username = strtolower($_POST['username']);
+    $email = strtolower($_POST['email']);
     $password = $_POST['password'];
     $passwordrepeat = $_POST['passwordrepeat'];
 
+    // checks for invalid form entries
     if (empty($username) || empty($email) || empty($password) || empty($passwordrepeat)) {
         header("Location: ../html/register.php?error=emptyfields&username=".$username."&email=".$email);
         exit();
@@ -30,6 +32,7 @@ if (isset($_POST['register-button'])) {
         exit();
     }
     else {
+        // checks whether username is taken
         $sql = "SELECT username FROM staff WHERE username=?";
         $stmt = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -53,6 +56,7 @@ if (isset($_POST['register-button'])) {
                     exit();
                 }
                 else {
+                    // hashes the password, and stores the new user information in database
                     $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
                     mysqli_stmt_bind_param($stmt, "sss", $username, $email, $hashedpassword);
                     mysqli_stmt_execute($stmt);
@@ -62,8 +66,6 @@ if (isset($_POST['register-button'])) {
             }
         }
     }
-    mysqli_stmt_close($stmt);
-    mysqli_close($conn);
 }
 else {
     header("Location: ../html/register.php");

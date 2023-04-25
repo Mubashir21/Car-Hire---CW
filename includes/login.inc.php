@@ -1,10 +1,12 @@
 <?php 
 
+    // check username and password against the database, and lets the user in if the credentials are correct
+
     if (isset($_POST["login-button"])) {
         
         require 'dbh.inc.php';
 
-        $emailuid = $_POST["emailuid"];
+        $emailuid = strtolower($_POST["emailuid"]);
         $password = $_POST["password"];
 
         if (empty($emailuid) || empty($password)) {
